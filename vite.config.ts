@@ -5,11 +5,12 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    base: './',
     plugins: [
       react(),
       tailwindcss(),
       {
-        name: 'orbit-inquiry-api',
+        name: 'orbit-inquiry-and-automation-api',
         configureServer(server) {
           server.middlewares.use('/api/inquiries', (req, res, next) => {
             if (req.method === 'POST') {
@@ -25,6 +26,46 @@ export default defineConfig(() => {
                     ok: true,
                     status: 'dispatched',
                     receivedAt: new Date().toISOString(),
+                  })
+                );
+              });
+              return;
+            }
+            next();
+          });
+
+          server.middlewares.use('/api/automation/trigger', (req, res, next) => {
+            if (req.method === 'POST') {
+              let body = '';
+              req.on('data', (chunk) => {
+                body += chunk.toString();
+              });
+              req.on('end', () => {
+                let parsed: Record<string, unknown> = {};
+                try {
+                  parsed = JSON.parse(body || '{}');
+                } catch {
+                  parsed = {};
+                }
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 200;
+                res.end(
+                  JSON.stringify({
+                    ok: true,
+                    provider: parsed.provider || 'apify-ai-bridge',
+                    actorOrWebhookId: parsed.actorId || 'orbit-agency/ai-lead-extractor',
+                    runId: `RUN-${Date.now().toString(36).toUpperCase()}`,
+                    status: 'SUCCEEDED',
+                    executedAt: new Date().toISOString(),
+                    datasetItemsCount: 3,
+                    sampleOutput: [
+                      {
+                        entity: 'Orbit Agency Automated Pipeline',
+                        leadScore: 98,
+                        qualificationStatus: 'VERIFIED_HIGH_INTENT',
+                        recommendedAction: '24-Hour Prototype Kickoff',
+                      },
+                    ],
                   })
                 );
               });

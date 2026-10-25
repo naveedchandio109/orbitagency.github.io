@@ -9,8 +9,8 @@
 
   html {
     font-family: var(--font-sans);
-    background-color: #FFFFFF;
-    color: #0F172A;
+    background-color: #05050A;
+    color: #F4F6FB;
     scroll-behavior: smooth;
   }
 
@@ -42,25 +42,35 @@
   }
 }
 
-@keyframes orbitPulseGlow {
+@keyframes neonPulseSoft {
   0%, 100% {
-    filter: drop-shadow(0 2px 8px rgba(14, 165, 233, 0.35)) drop-shadow(0 0 14px rgba(138, 43, 226, 0.25));
+    opacity: 0.88;
+    filter: drop-shadow(0 0 14px rgba(0, 245, 255, 0.45)) drop-shadow(0 0 28px rgba(138, 43, 226, 0.28));
   }
   50% {
-    filter: drop-shadow(0 2px 12px rgba(236, 72, 153, 0.45)) drop-shadow(0 0 20px rgba(14, 165, 233, 0.45));
+    opacity: 1;
+    filter: drop-shadow(0 0 22px rgba(0, 245, 255, 0.75)) drop-shadow(0 0 42px rgba(255, 42, 133, 0.42));
   }
 }
 
 .animate-orbit-360 {
-  animation: orbitSpin360 10s linear infinite;
+  animation: orbitSpin360 18s linear infinite;
   transform-origin: center center;
 }
 
 .animate-orbit-reverse {
-  animation: orbitSpinReverse 14s linear infinite;
+  animation: orbitSpinReverse 24s linear infinite;
   transform-origin: center center;
 }
 
 .animate-neon-pulse {
-  animation: orbitPulseGlow 3.5s ease-in-out infinite;
+  animation: neonPulseSoft 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-360,
+  .animate-orbit-reverse,
+  .animate-neon-pulse {
+    animation-duration: 60s;
+  }
 }

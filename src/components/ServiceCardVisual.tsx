@@ -4,45 +4,31 @@ interface ServiceCardVisualProps {
   visualType: 'mobile' | 'ai' | 'web' | 'management';
 }
 
-/**
- * Clean, high-resolution visual product mockup illustrations embedded inside each
- * of the 4 compact Home Page cards, illustrating the finished digital product
- * and our 3-step secure build process.
- */
 export const ServiceCardVisual: React.FC<ServiceCardVisualProps> = ({ visualType }) => {
   if (visualType === 'mobile') {
     return (
-      <div className="w-full h-36 rounded-xl bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border border-sky-200 overflow-hidden relative flex items-center justify-between px-4 py-3">
-        {/* Visual Phone & App Mockup Illustration */}
-        <svg viewBox="0 0 320 120" className="w-full h-full" fill="none">
-          {/* Phone Frame 1 */}
-          <rect x="12" y="8" width="64" height="104" rx="10" fill="#FFFFFF" stroke="#0284C7" strokeWidth="2" />
-          <rect x="32" y="14" width="24" height="3" rx="1.5" fill="#94A3B8" />
-          <rect x="20" y="24" width="48" height="26" rx="4" fill="#E0F2FE" />
-          <path d="M25 42 L35 32 L45 38 L58 28" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" />
-          <rect x="20" y="56" width="48" height="10" rx="3" fill="#F1F5F9" />
-          <rect x="20" y="70" width="36" height="10" rx="3" fill="#F1F5F9" />
-          <rect x="20" y="88" width="48" height="14" rx="4" fill="#0284C7" />
-          <text x="31" y="98" fill="#FFFFFF" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">iOS &amp; ANDROID</text>
+      <div className="relative w-full h-44 rounded-lg bg-[#070812] border border-[#00F5FF]/20 overflow-hidden flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(0,245,255,0.14),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(138,43,226,0.14),transparent_60%)]" />
+        <svg viewBox="0 0 360 150" className="w-full h-full relative z-10" fill="none">
+          {/* Dual Native iOS & Android Device Frames */}
+          <rect x="28" y="14" width="132" height="122" rx="12" fill="#0B0E1A" stroke="#00F5FF" strokeOpacity="0.5" strokeWidth="1.5" />
+          <rect x="68" y="20" width="52" height="4" rx="2" fill="#00F5FF" fillOpacity="0.4" />
+          <path d="M42 78 C62 54, 82 92, 102 64 C118 44, 132 72, 146 52" stroke="#00F5FF" strokeWidth="2.2" strokeLinecap="round" />
+          <rect x="42" y="94" width="54" height="8" rx="4" fill="#00F5FF" fillOpacity="0.25" />
+          <rect x="42" y="108" width="84" height="6" rx="3" fill="#8A2BE2" fillOpacity="0.35" />
+          <circle cx="136" cy="100" r="10" fill="#10B981" fillOpacity="0.2" stroke="#10B981" strokeWidth="1.4" />
+          <path d="M132 100 L135 103 L141 97" stroke="#10B981" strokeWidth="1.6" strokeLinecap="round" />
 
-          {/* Build Process Visual Cards on Right */}
-          <rect x="92" y="14" width="214" height="26" rx="6" fill="#FFFFFF" stroke="#BAE6FD" strokeWidth="1.5" />
-          <circle cx="106" cy="27" r="6" fill="#0284C7" />
-          <text x="104" y="30" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">1</text>
-          <text x="120" y="25" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">24h UI/UX Interactive Prototype</text>
-          <text x="120" y="35" fill="#475569" fontSize="7" fontFamily="sans-serif">Clean mobile screens &amp; user flow</text>
-
-          <rect x="92" y="47" width="214" height="26" rx="6" fill="#FFFFFF" stroke="#BAE6FD" strokeWidth="1.5" />
-          <circle cx="106" cy="60" r="6" fill="#0284C7" />
-          <text x="104" y="63" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">2</text>
-          <text x="120" y="58" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Secure Native &amp; Cloud Coding</text>
-          <text x="120" y="68" fill="#475569" fontSize="7" fontFamily="sans-serif">Fast database, login &amp; real-time sync</text>
-
-          <rect x="92" y="80" width="214" height="26" rx="6" fill="#FFFFFF" stroke="#BAE6FD" strokeWidth="1.5" />
-          <circle cx="106" cy="93" r="6" fill="#10B981" />
-          <text x="104" y="96" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">3</text>
-          <text x="120" y="91" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">App Store &amp; Play Store Launch</text>
-          <text x="120" y="101" fill="#059669" fontSize="7" fontWeight="bold" fontFamily="sans-serif">100% Verified &amp; Ready for Users</text>
+          {/* Second Card / Real-time Sync Panel */}
+          <rect x="184" y="22" width="148" height="106" rx="10" fill="#0B0E1A" stroke="#8A2BE2" strokeOpacity="0.55" strokeWidth="1.5" />
+          <text x="198" y="44" fill="#00F5FF" fontSize="9" fontFamily="monospace">iOS · ANDROID SYNC</text>
+          <rect x="198" y="54" width="118" height="18" rx="4" fill="#121629" stroke="#00F5FF" strokeOpacity="0.25" />
+          <circle cx="209" cy="63" r="4" fill="#00F5FF" />
+          <rect x="220" y="60" width="66" height="6" rx="3" fill="#E2E8F0" fillOpacity="0.6" />
+          <rect x="198" y="80" width="56" height="32" rx="4" fill="#121629" stroke="#10B981" strokeOpacity="0.35" />
+          <text x="206" y="99" fill="#10B981" fontSize="10" fontFamily="monospace" fontWeight="bold">99.98%</text>
+          <rect x="260" y="80" width="56" height="32" rx="4" fill="#121629" stroke="#FF2A85" strokeOpacity="0.35" />
+          <text x="269" y="99" fill="#FF2A85" fontSize="10" fontFamily="monospace" fontWeight="bold">60 FPS</text>
         </svg>
       </div>
     );
@@ -50,35 +36,33 @@ export const ServiceCardVisual: React.FC<ServiceCardVisualProps> = ({ visualType
 
   if (visualType === 'ai') {
     return (
-      <div className="w-full h-36 rounded-xl bg-gradient-to-br from-purple-50 via-violet-50 to-fuchsia-50 border border-purple-200 overflow-hidden relative flex items-center justify-between px-4 py-3">
-        <svg viewBox="0 0 320 120" className="w-full h-full" fill="none">
-          {/* AI Hub Illustration */}
-          <rect x="12" y="12" width="72" height="96" rx="10" fill="#FFFFFF" stroke="#7C3AED" strokeWidth="2" />
-          <circle cx="48" cy="44" r="18" fill="#F3E8FF" stroke="#7C3AED" strokeWidth="1.8" />
-          <polygon points="48,32 58,44 48,56 38,44" fill="#7C3AED" />
-          <rect x="22" y="72" width="52" height="10" rx="3" fill="#F3E8FF" />
-          <text x="27" y="79.5" fill="#6D28D9" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">AI AUTOMATION</text>
-          <rect x="22" y="87" width="52" height="12" rx="4" fill="#7C3AED" />
-          <text x="29" y="95" fill="#FFFFFF" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">24/7 ACTIVE</text>
+      <div className="relative w-full h-44 rounded-lg bg-[#070812] border border-[#8A2BE2]/30 overflow-hidden flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(138,43,226,0.18),transparent_60%),radial-gradient(circle_at_20%_80%,rgba(0,245,255,0.12),transparent_60%)]" />
+        <svg viewBox="0 0 360 150" className="w-full h-full relative z-10" fill="none">
+          {/* Multi-Agent Neural & Apify Orchestration Graph */}
+          <line x1="88" y1="45" x2="175" y2="75" stroke="#00F5FF" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="88" y1="105" x2="175" y2="75" stroke="#8A2BE2" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="175" y1="75" x2="275" y2="45" stroke="#FF2A85" strokeWidth="1.5" />
+          <line x1="175" y1="75" x2="275" y2="105" stroke="#10B981" strokeWidth="1.5" />
 
-          {/* 3-Step AI Build Process */}
-          <rect x="98" y="14" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#DDD6FE" strokeWidth="1.5" />
-          <circle cx="112" cy="27" r="6" fill="#7C3AED" />
-          <text x="110" y="30" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">1</text>
-          <text x="126" y="25" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Custom AI &amp; Workflow Setup</text>
-          <text x="126" y="35" fill="#475569" fontSize="7" fontFamily="sans-serif">Tailored to your business data &amp; goals</text>
+          {/* Input Nodes */}
+          <rect x="24" y="28" width="68" height="34" rx="7" fill="#0D1021" stroke="#00F5FF" strokeWidth="1.4" />
+          <text x="31" y="48" fill="#00F5FF" fontSize="8.5" fontFamily="monospace">APIFY ACTOR</text>
 
-          <rect x="98" y="47" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#DDD6FE" strokeWidth="1.5" />
-          <circle cx="112" cy="60" r="6" fill="#7C3AED" />
-          <text x="110" y="63" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">2</text>
-          <text x="126" y="58" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Chatbot, Voice &amp; SaaS Integration</text>
-          <text x="126" y="68" fill="#475569" fontSize="7" fontFamily="sans-serif">Private, encrypted &amp; ultra-fast responses</text>
+          <rect x="24" y="88" width="68" height="34" rx="7" fill="#0D1021" stroke="#8A2BE2" strokeWidth="1.4" />
+          <text x="35" y="108" fill="#C084FC" fontSize="8.5" fontFamily="monospace">VOICE / LLM</text>
 
-          <rect x="98" y="80" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#DDD6FE" strokeWidth="1.5" />
-          <circle cx="112" cy="93" r="6" fill="#10B981" />
-          <text x="110" y="96" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">3</text>
-          <text x="126" y="91" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Automated Revenue &amp; Time Savings</text>
-          <text x="126" y="101" fill="#059669" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Saves 80%+ manual work immediately</text>
+          {/* Central Agent Core */}
+          <circle cx="178" cy="75" r="28" fill="#110E24" stroke="#8A2BE2" strokeWidth="2" />
+          <polygon points="178,59 194,75 178,91 162,75" fill="#00F5FF" fillOpacity="0.25" stroke="#00F5FF" strokeWidth="1.5" />
+          <circle cx="178" cy="75" r="4" fill="#FFFFFF" />
+
+          {/* Output Automation Nodes */}
+          <rect x="266" y="28" width="72" height="34" rx="7" fill="#0D1021" stroke="#FF2A85" strokeWidth="1.4" />
+          <text x="275" y="48" fill="#FF2A85" fontSize="8.5" fontFamily="monospace">AI SAAS API</text>
+
+          <rect x="266" y="88" width="72" height="34" rx="7" fill="#0D1021" stroke="#10B981" strokeWidth="1.4" />
+          <text x="275" y="108" fill="#10B981" fontSize="8.5" fontFamily="monospace">AUTO WORKFLOW</text>
         </svg>
       </div>
     );
@@ -86,74 +70,45 @@ export const ServiceCardVisual: React.FC<ServiceCardVisualProps> = ({ visualType
 
   if (visualType === 'web') {
     return (
-      <div className="w-full h-36 rounded-xl bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 border border-pink-200 overflow-hidden relative flex items-center justify-between px-4 py-3">
-        <svg viewBox="0 0 320 120" className="w-full h-full" fill="none">
-          {/* Website Portfolio & Store Browser Mockup */}
-          <rect x="10" y="12" width="80" height="96" rx="8" fill="#FFFFFF" stroke="#DB2777" strokeWidth="2" />
-          <line x1="10" y1="26" x2="90" y2="26" stroke="#FBCFE8" strokeWidth="1.5" />
-          <circle cx="18" cy="19" r="2.2" fill="#DB2777" />
-          <circle cx="25" cy="19" r="2.2" fill="#F59E0B" />
-          <circle cx="32" cy="19" r="2.2" fill="#10B981" />
-          <rect x="18" y="34" width="64" height="28" rx="4" fill="#FDF2F8" />
-          <text x="23" y="51" fill="#BE185D" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">WEB PORTFOLIO</text>
-          <rect x="18" y="68" width="30" height="14" rx="3" fill="#F1F5F9" />
-          <rect x="52" y="68" width="30" height="14" rx="3" fill="#F1F5F9" />
-          <rect x="18" y="88" width="64" height="13" rx="4" fill="#DB2777" />
-          <text x="24" y="96.5" fill="#FFFFFF" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">STRIPE CHECKOUT</text>
+      <div className="relative w-full h-44 rounded-lg bg-[#070812] border border-[#FF2A85]/25 overflow-hidden flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_75%,rgba(255,42,133,0.14),transparent_60%),radial-gradient(circle_at_80%_25%,rgba(0,245,255,0.12),transparent_60%)]" />
+        <svg viewBox="0 0 360 150" className="w-full h-full relative z-10" fill="none">
+          <rect x="22" y="14" width="316" height="122" rx="10" fill="#0B0E1A" stroke="#FF2A85" strokeOpacity="0.45" strokeWidth="1.5" />
+          <line x1="22" y1="34" x2="338" y2="34" stroke="#FFFFFF" strokeOpacity="0.1" />
+          <circle cx="36" cy="24" r="3" fill="#FF2A85" />
+          <circle cx="46" cy="24" r="3" fill="#00F5FF" />
+          <circle cx="56" cy="24" r="3" fill="#10B981" />
 
-          {/* 3-Step Website Build Process */}
-          <rect x="102" y="14" width="204" height="26" rx="6" fill="#FFFFFF" stroke="#FBCFE8" strokeWidth="1.5" />
-          <circle cx="116" cy="27" r="6" fill="#DB2777" />
-          <text x="114" y="30" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">1</text>
-          <text x="130" y="25" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Custom Website &amp; Portfolio Design</text>
-          <text x="130" y="35" fill="#475569" fontSize="7" fontFamily="sans-serif">Clean, modern &amp; mobile-responsive layout</text>
+          <rect x="36" y="46" width="166" height="76" rx="6" fill="#11162A" stroke="#00F5FF" strokeOpacity="0.25" />
+          <text x="48" y="64" fill="#F4F6FB" fontSize="9.5" fontFamily="monospace" fontWeight="bold">GLOBAL COMMERCE EDGE</text>
+          <path d="M48 104 L76 88 L104 94 L136 72 L168 78 L188 60" stroke="#00F5FF" strokeWidth="2" strokeLinecap="round" />
+          <rect x="48" y="110" width="76" height="5" rx="2.5" fill="#FF2A85" fillOpacity="0.6" />
 
-          <rect x="102" y="47" width="204" height="26" rx="6" fill="#FFFFFF" stroke="#FBCFE8" strokeWidth="1.5" />
-          <circle cx="116" cy="60" r="6" fill="#DB2777" />
-          <text x="114" y="63" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">2</text>
-          <text x="130" y="58" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">E-Commerce &amp; Global Payments</text>
-          <text x="130" y="68" fill="#475569" fontSize="7" fontFamily="sans-serif">Stripe checkout &amp; multi-currency support</text>
-
-          <rect x="102" y="80" width="204" height="26" rx="6" fill="#FFFFFF" stroke="#FBCFE8" strokeWidth="1.5" />
-          <circle cx="116" cy="93" r="6" fill="#10B981" />
-          <text x="114" y="96" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">3</text>
-          <text x="130" y="91" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">High-Speed Hosting &amp; SEO Ready</text>
-          <text x="130" y="101" fill="#059669" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Built to convert visitors into clients</text>
+          <rect x="214" y="46" width="110" height="76" rx="6" fill="#11162A" stroke="#10B981" strokeOpacity="0.4" />
+          <text x="224" y="63" fill="#10B981" fontSize="8.5" fontFamily="monospace">STRIPE PAYOUTS</text>
+          <text x="224" y="84" fill="#FFFFFF" fontSize="13" fontFamily="monospace" fontWeight="bold">+144% CVR</text>
+          <rect x="224" y="96" width="88" height="16" rx="4" fill="#10B981" fillOpacity="0.2" stroke="#10B981" strokeWidth="1" />
+          <text x="236" y="107" fill="#10B981" fontSize="8" fontFamily="monospace">MULTI-CURRENCY</text>
         </svg>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-36 rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border border-emerald-200 overflow-hidden relative flex items-center justify-between px-4 py-3">
-      <svg viewBox="0 0 320 120" className="w-full h-full" fill="none">
-        {/* Shield & Milestone Guarantee Graphic */}
-        <rect x="12" y="12" width="72" height="96" rx="10" fill="#FFFFFF" stroke="#059669" strokeWidth="2" />
-        <circle cx="48" cy="44" r="18" fill="#D1FAE5" stroke="#059669" strokeWidth="1.8" />
-        <path d="M41 44 L46 49 L56 39" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="20" y="71" width="56" height="10" rx="3" fill="#D1FAE5" />
-        <text x="24" y="78.5" fill="#065F46" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">24H PROTOTYPE</text>
-        <rect x="20" y="86" width="56" height="13" rx="4" fill="#059669" />
-        <text x="24" y="94.5" fill="#FFFFFF" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif">FULL SECURITY</text>
+    <div className="relative w-full h-44 rounded-lg bg-[#070812] border border-[#10B981]/25 overflow-hidden flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(16,185,129,0.14),transparent_60%),radial-gradient(circle_at_25%_25%,rgba(0,245,255,0.14),transparent_60%)]" />
+      <svg viewBox="0 0 360 150" className="w-full h-full relative z-10" fill="none">
+        <rect x="22" y="16" width="316" height="118" rx="10" fill="#0B0E1A" stroke="#10B981" strokeOpacity="0.45" strokeWidth="1.5" />
+        <text x="38" y="38" fill="#00F5FF" fontSize="9" fontFamily="monospace">24-HOUR PROTOTYPE START · FLEXIBLE MILESTONES</text>
 
-        {/* 3-Step Managed Delivery Process */}
-        <rect x="98" y="14" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#A7F3D0" strokeWidth="1.5" />
-        <circle cx="112" cy="27" r="6" fill="#059669" />
-        <text x="110" y="30" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">1</text>
-        <text x="126" y="25" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">24-Hour Quick Response &amp; Start</text>
-        <text x="126" y="35" fill="#475569" fontSize="7" fontFamily="sans-serif">Fast prototype kickoff for small scopes</text>
+        <rect x="38" y="50" width="95" height="20" rx="5" fill="#00F5FF" fillOpacity="0.18" stroke="#00F5FF" strokeWidth="1.2" />
+        <text x="46" y="63" fill="#00F5FF" fontSize="8.5" fontFamily="monospace">M1: 24H KICKOFF</text>
 
-        <rect x="98" y="47" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#A7F3D0" strokeWidth="1.5" />
-        <circle cx="112" cy="60" r="6" fill="#059669" />
-        <text x="110" y="63" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">2</text>
-        <text x="126" y="58" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Dedicated Team Managed For You</text>
-        <text x="126" y="68" fill="#475569" fontSize="7" fontFamily="sans-serif">Designers, coders &amp; QA under one roof</text>
+        <rect x="118" y="76" width="115" height="20" rx="5" fill="#8A2BE2" fillOpacity="0.22" stroke="#8A2BE2" strokeWidth="1.2" />
+        <text x="128" y="89" fill="#C084FC" fontSize="8.5" fontFamily="monospace">M2: SPRINT BUILD</text>
 
-        <rect x="98" y="80" width="208" height="26" rx="6" fill="#FFFFFF" stroke="#A7F3D0" strokeWidth="1.5" />
-        <circle cx="112" cy="93" r="6" fill="#0284C7" />
-        <text x="110" y="96" fill="#FFFFFF" fontSize="7" fontWeight="bold" fontFamily="sans-serif">3</text>
-        <text x="126" y="91" fill="#0F172A" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">Flexible Milestone Delivery</text>
-        <text x="126" y="101" fill="#0284C7" fontSize="7" fontWeight="bold" fontFamily="sans-serif">100% IP Ownership &amp; NDA Protection</text>
+        <rect x="210" y="102" width="112" height="20" rx="5" fill="#10B981" fillOpacity="0.22" stroke="#10B981" strokeWidth="1.2" />
+        <text x="220" y="115" fill="#10B981" fontSize="8.5" fontFamily="monospace">M3: QA &amp; DEPLOY</text>
       </svg>
     </div>
   );

@@ -21,9 +21,9 @@ const PROJECT_CATEGORIES = [
 
 const BUDGET_RANGES = [
   '$1,500 – $3,500 (24-Hour Rapid Prototype / Small Scope)',
-  '$3,500 – $10,000 (Core MVP / Custom AI, Website or Mobile Build)',
+  '$3,500 – $10,000 (Core MVP / Custom AI or Mobile Build)',
   '$10,000 – $25,000 (Full-Scale Platform & Architecture)',
-  '$25,000+ (Dedicated Multi-Engineer Team & Long-Term Management)',
+  '$25,000+ (Dedicated Multi-Engineer Roster & Long-Term SLA)',
 ];
 
 export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselectedCategory }) => {
@@ -72,12 +72,12 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
     const payload = createInquiryPayload(formState);
 
     try {
-      await fetch('/api/inquiries', {
+      await fetch('./api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       }).catch(() => {
-        // Fallback if backend route is not mounted
+        // Fallback if backend route is not mounted on static GitHub Pages
       });
     } finally {
       setIsSubmitting(false);
@@ -99,69 +99,69 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
   };
 
   return (
-    <div className="rounded-2xl bg-white border border-slate-200 p-5 sm:p-7 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-200">
+    <div className="rounded-2xl bg-[#0A0C16]/90 border border-[#00F5FF]/30 p-6 sm:p-10 shadow-[0_0_45px_rgba(0,245,255,0.08)]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
-          <span className="text-[11px] font-extrabold uppercase tracking-wider text-blue-700 block">
-            SECURE PROJECT INTAKE · DIRECT TO NAVEED ALI
+          <span className="text-xs font-semibold tracking-wider text-[#00F5FF] block">
+            ENCRYPTED EXECUTIVE INTAKE · DIRECT TO MANAGING DIRECTOR
           </span>
-          <h3 className="text-lg sm:text-xl font-extrabold font-display text-slate-950 mt-0.5">
-            Submit Your Project Brief
+          <h3 className="text-2xl sm:text-3xl font-bold font-display text-white mt-1">
+            Secure Project Inquiry &amp; Client Verification Form
           </h3>
         </div>
-        <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700 font-mono-tabular shrink-0">
-          <Lock className="w-3.5 h-3.5 text-emerald-600" />
-          <span>100% Confidential</span>
+        <div className="inline-flex items-center gap-2 text-xs text-slate-300 font-mono-tabular shrink-0">
+          <Lock className="w-4 h-4 text-[#10B981]" />
+          <span>Protected Executive Routing</span>
         </div>
       </div>
 
       {submittedRecord ? (
         <div
-          className="py-5 space-y-4"
+          className="py-8 space-y-6"
           role="status"
           aria-live="polite"
           data-testid="inquiry-confirmation"
         >
-          <div className="flex items-start gap-3 pb-4 border-b border-slate-200">
-            <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
-            <div className="space-y-1">
-              <h4 className="text-base font-extrabold text-slate-950 font-display">
-                Project Brief Verified & Dispatched ({submittedRecord.referenceId})
+          <div className="flex items-start gap-4 pb-6 border-b border-white/10">
+            <CheckCircle2 className="w-7 h-7 text-[#10B981] shrink-0 mt-0.5" />
+            <div className="space-y-1.5">
+              <h4 className="text-lg font-bold text-white font-display">
+                Project Brief Verified &amp; Dispatched ({submittedRecord.referenceId})
               </h4>
-              <p className="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
-                Thank you, <strong className="text-slate-950 font-extrabold">{submittedRecord.client.fullName}</strong>. Your inquiry for{' '}
-                <strong className="text-blue-700 font-extrabold">{submittedRecord.project.category}</strong> has been securely routed to Orbit Agency.
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Thank you, <strong className="text-white">{submittedRecord.client.fullName}</strong>. Your verified project dossier for{' '}
+                <strong className="text-[#00F5FF]">{submittedRecord.project.category}</strong> has been securely routed to Orbit Agency’s executive desk under strict NDA confidentiality.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-slate-200 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-6 border-b border-white/10 text-xs">
             <div>
-              <span className="text-slate-500 font-bold block">Client & Country</span>
-              <span className="text-slate-950 font-extrabold mt-0.5 block">
+              <span className="text-slate-400 block">Client &amp; Region</span>
+              <span className="text-white font-semibold mt-1 block">
                 {submittedRecord.client.fullName} · {submittedRecord.client.country}
               </span>
             </div>
             <div>
-              <span className="text-slate-500 font-bold block">Verification Profile</span>
-              <span className="text-blue-700 font-extrabold font-mono-tabular truncate mt-0.5 block">
+              <span className="text-slate-400 block">Verification Profile</span>
+              <span className="text-[#00F5FF] font-mono-tabular truncate mt-1 block">
                 {submittedRecord.client.verificationUrl}
               </span>
             </div>
             <div>
-              <span className="text-slate-500 font-bold block">Selected Budget</span>
-              <span className="text-emerald-700 font-extrabold mt-0.5 block">
+              <span className="text-slate-400 block">Allocated Scope Tier</span>
+              <span className="text-[#10B981] font-semibold mt-1 block">
                 {submittedRecord.project.budget}
               </span>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
             <a
               href={submittedRecord.whatsappContinuationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-sm transition-all whitespace-nowrap"
+              className="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-[#04130D] font-bold text-sm shadow-[0_0_25px_rgba(16,185,129,0.45)] transition-all whitespace-nowrap"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Continue Directly on WhatsApp with Naveed Ali</span>
@@ -169,20 +169,20 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 text-xs font-extrabold transition-colors cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 text-sm font-medium transition-colors cursor-pointer whitespace-nowrap"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Submit Another</span>
+              <RotateCcw className="w-4 h-4" />
+              <span>Submit Another Scope</span>
             </button>
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4" noValidate>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label
                 htmlFor="inquiry-full-name"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
+                className="block text-xs font-semibold text-slate-200 mb-2"
               >
                 Full Name *
               </label>
@@ -192,11 +192,11 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
                 value={formState.fullName}
                 onChange={(e) => handleChange('fullName', e.target.value)}
                 placeholder="e.g., Marcus Sterling"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600"
+                className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
                 required
               />
               {errors.fullName && (
-                <p className="mt-1 text-[11px] font-extrabold text-rose-600" role="alert">
+                <p className="mt-1.5 text-xs text-rose-400" role="alert">
                   {errors.fullName}
                 </p>
               )}
@@ -205,7 +205,7 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
             <div>
               <label
                 htmlFor="inquiry-country"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
+                className="block text-xs font-semibold text-slate-200 mb-2"
               >
                 Country *
               </label>
@@ -214,37 +214,37 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
                 type="text"
                 value={formState.country}
                 onChange={(e) => handleChange('country', e.target.value)}
-                placeholder="e.g., United States, UK, UAE"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600"
+                placeholder="e.g., United States, United Kingdom, UAE, Switzerland"
+                className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
                 required
               />
               {errors.country && (
-                <p className="mt-1 text-[11px] font-extrabold text-rose-600" role="alert">
+                <p className="mt-1.5 text-xs text-rose-400" role="alert">
                   {errors.country}
                 </p>
               )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label
                 htmlFor="inquiry-verification-url"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
+                className="block text-xs font-semibold text-slate-200 mb-2"
               >
-                Company or LinkedIn Profile URL *
+                Company or LinkedIn Profile URL (Client Verification) *
               </label>
               <input
                 id="inquiry-verification-url"
                 type="text"
                 value={formState.verificationUrl}
                 onChange={(e) => handleChange('verificationUrl', e.target.value)}
-                placeholder="https://linkedin.com/in/profile or Company"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600"
+                placeholder="https://linkedin.com/in/yourprofile or company domain"
+                className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
                 required
               />
               {errors.verificationUrl && (
-                <p className="mt-1 text-[11px] font-extrabold text-rose-600" role="alert">
+                <p className="mt-1.5 text-xs text-rose-400" role="alert">
                   {errors.verificationUrl}
                 </p>
               )}
@@ -253,7 +253,7 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
             <div>
               <label
                 htmlFor="inquiry-category"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
+                className="block text-xs font-semibold text-slate-200 mb-2"
               >
                 Project Category *
               </label>
@@ -261,76 +261,86 @@ export const SecureInquiryForm: React.FC<SecureInquiryFormProps> = ({ preselecte
                 id="inquiry-category"
                 value={formState.projectCategory}
                 onChange={(e) => handleChange('projectCategory', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 focus:bg-white focus:outline-none focus:border-blue-600"
+                className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
               >
                 {PROJECT_CATEGORIES.map((category) => (
-                  <option key={category} value={category} className="bg-white text-slate-950 font-bold">
+                  <option key={category} value={category} className="bg-[#080912] text-white">
                     {category}
                   </option>
                 ))}
               </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label
-                htmlFor="inquiry-budget"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
-              >
-                Estimated Budget *
-              </label>
-              <select
-                id="inquiry-budget"
-                value={formState.estimatedBudget}
-                onChange={(e) => handleChange('estimatedBudget', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 focus:bg-white focus:outline-none focus:border-blue-600"
-              >
-                {BUDGET_RANGES.map((range) => (
-                  <option key={range} value={range} className="bg-white text-slate-950 font-bold">
-                    {range}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="inquiry-details"
-                className="block text-xs font-extrabold text-slate-900 mb-1"
-              >
-                Project Details & Goals *
-              </label>
-              <input
-                id="inquiry-details"
-                type="text"
-                value={formState.projectDetails}
-                onChange={(e) => handleChange('projectDetails', e.target.value)}
-                placeholder="Describe your website, AI tool, or mobile app scope..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600"
-                required
-              />
-              {errors.projectDetails && (
-                <p className="mt-1 text-[11px] font-extrabold text-rose-600" role="alert">
-                  {errors.projectDetails}
+              {errors.projectCategory && (
+                <p className="mt-1.5 text-xs text-rose-400" role="alert">
+                  {errors.projectCategory}
                 </p>
               )}
             </div>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500">
-              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span>Protected routing directly to Orbit Agency executive intake.</span>
+          <div>
+            <label
+              htmlFor="inquiry-budget"
+              className="block text-xs font-semibold text-slate-200 mb-2"
+            >
+              Estimated Budget *
+            </label>
+            <select
+              id="inquiry-budget"
+              value={formState.estimatedBudget}
+              onChange={(e) => handleChange('estimatedBudget', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
+            >
+              {BUDGET_RANGES.map((range) => (
+                <option key={range} value={range} className="bg-[#080912] text-white">
+                  {range}
+                </option>
+              ))}
+            </select>
+            {errors.estimatedBudget && (
+              <p className="mt-1.5 text-xs text-rose-400" role="alert">
+                {errors.estimatedBudget}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="inquiry-details"
+              className="block text-xs font-semibold text-slate-200 mb-2"
+            >
+              Project Details, Goals &amp; Desired Timeline *
+            </label>
+            <textarea
+              id="inquiry-details"
+              rows={4}
+              value={formState.projectDetails}
+              onChange={(e) => handleChange('projectDetails', e.target.value)}
+              placeholder="Describe your product vision, required platforms (iOS, Android, AI SaaS, Web), and whether you need a 24-hour prototype start..."
+              className="w-full px-4 py-3 rounded-xl bg-[#05050A] border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] transition-colors"
+              required
+            />
+            {errors.projectDetails && (
+              <p className="mt-1.5 text-xs text-rose-400" role="alert">
+                {errors.projectDetails}
+              </p>
+            )}
+          </div>
+
+          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <ShieldCheck className="w-4 h-4 text-[#00F5FF] shrink-0" />
+              <span>
+                Zero spam guarantee. Direct encrypted routing to Orbit Agency executive intake.
+              </span>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm shadow-sm transition-all cursor-pointer whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] text-[#05050A] font-bold text-sm shadow-[0_0_28px_rgba(0,245,255,0.4)] hover:brightness-110 transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
-              <Send className="w-3.5 h-3.5" />
-              <span>{isSubmitting ? 'Sending...' : 'Submit Verified Project Inquiry'}</span>
+              <Send className="w-4 h-4" />
+              <span>{isSubmitting ? 'Encrypting & Sending...' : 'Submit Verified Project Inquiry'}</span>
             </button>
           </div>
         </form>

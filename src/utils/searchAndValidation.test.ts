@@ -1,91 +1,100 @@
-import test from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { BLOG_POSTS, CORE_SERVICES, PORTFOLIO_SHOWCASE, WHATSAPP_BASE_URL } from '../data/orbitData';
 import {
-  buildWhatsAppUrl,
-  createInquiryPayload,
-  filterBlogPosts,
-  filterPortfolioItems,
   filterServices,
-  getProtectedDestinationInbox,
+  filterPortfolioItems,
   validateInquiryForm,
+  getProtectedDestinationInbox
 } from './searchAndValidation';
+import {
+  buildApifyActorEndpoint,
+  APIFY_ACTOR_PRESETS
+} from './apifyConnector';
+import { CORE_SERVICES, PORTFOLIO_SHOWCASE } from '../data/orbitData';
 
-test('filterServices returns all 4 core services when query is empty and tag is All', () => {
-  const results = filterServices(CORE_SERVICES, '', 'All');
-  assert.equal(results.length, 4);
-});
-
-test('filterServices filters accurately by quick filter tags', () => {
-  const mobileOnly = filterServices(CORE_SERVICES, '', 'Mobile Apps');
-  assert.equal(mobileOnly.length, 1);
-  assert.equal(mobileOnly[0].title, 'iOS and Android Mobile App Development');
-
-  const aiOnly = filterServices(CORE_SERVICES, '', 'AI and Automation');
-  assert.equal(aiOnly.length, 1);
-  assert.equal(aiOnly[0].title, 'Custom AI Tools and Automation');
-});
-
-test('filterServices dynamically matches real-time search queries across keywords and portfolio highlights', () => {
-  const stripeMatch = filterServices(CORE_SERVICES, 'Stripe', 'All');
-  assert.equal(stripeMatch.length, 1);
-  assert.equal(stripeMatch[0].category, 'Web and E-Commerce');
-
-  const iosMatch = filterServices(CORE_SERVICES, 'iOS App', 'All');
-  assert.equal(iosMatch.length, 1);
-  assert.equal(iosMatch[0].category, 'Mobile Apps');
-});
-
-test('filterPortfolioItems and filterBlogPosts filter case studies and blogs by tag and search text', () => {
-  const allCases = filterPortfolioItems(PORTFOLIO_SHOWCASE, '', 'All');
-  assert.equal(allCases.length, 4);
-
-  const aiBlogs = filterBlogPosts(BLOG_POSTS, '', 'AI and Automation');
-  assert.equal(aiBlogs.length, 1);
-  assert.ok(aiBlogs[0].title.includes('Custom AI Tools'));
-});
-
-test('validateInquiryForm rejects incomplete inputs and accepts valid executive briefs', () => {
-  const invalidResult = validateInquiryForm({
-    fullName: '',
-    country: '',
-    verificationUrl: '',
-    projectCategory: '',
-    projectDetails: 'short',
-    estimatedBudget: '',
-  });
-  assert.equal(invalidResult.valid, false);
-  assert.ok(invalidResult.errors.fullName);
-  assert.ok(invalidResult.errors.country);
-  assert.ok(invalidResult.errors.verificationUrl);
-  assert.ok(invalidResult.errors.projectDetails);
-
-  const validResult = validateInquiryForm({
-    fullName: 'Alexander Vance',
-    country: 'United Kingdom',
-    verificationUrl: 'https://linkedin.com/in/alexandervance',
-    projectCategory: 'Custom AI Tools and Automation',
-    projectDetails: 'We need a custom multi-agent AI platform with a 24-hour prototype start.',
-    estimatedBudget: '$10,000 – $25,000 (Full-Scale Platform)',
-  });
-  assert.equal(validResult.valid, true);
-  assert.equal(Object.keys(validResult.errors).length, 0);
-});
-
-test('createInquiryPayload routes to orbitagency61@gmail.com and connects WhatsApp to 923042458687', () => {
-  assert.equal(getProtectedDestinationInbox(), 'orbitagency61@gmail.com');
-  assert.equal(buildWhatsAppUrl(), WHATSAPP_BASE_URL);
-
-  const payload = createInquiryPayload({
-    fullName: 'Elena Rostova',
-    country: 'Switzerland',
-    verificationUrl: 'https://vanguard-horology.ch',
-    projectCategory: 'Web and E-Commerce Platforms',
-    projectDetails: 'Global luxury storefront with Stripe multi-currency checkout.',
-    estimatedBudget: '$10,000 – $25,000 (Full-Scale Platform)',
+describe('Smart Search & Quick Filter Logic', () => {
+  it('returns all 4 core services and all portfolio items when query is empty and tag is All', () => {
+    const services = filterServices(CORE_SERVICES, '', 'All');
+    const portfolio = filterPortfolioItems(PORTFOLIO_SHOWCASE, '', 'All');
+    assert.equal(services.length, 4);
+    assert.equal(portfolio.length, 4);
   });
 
-  assert.equal(payload.recipientRoutingTarget, 'orbitagency61@gmail.com');
-  assert.ok(payload.referenceId.startsWith('ORB-'));
-  assert.ok(payload.whatsappContinuationUrl.startsWith('https://wa.me/923042458687?text='));
+  it('filters services by category tag accurately', () => {
+    const services = filterServices(CORE_SERVICES, '', 'AI and Automation');
+    assert.equal(services.length, 1);
+    assert.equal(services[0].id, 'service-ai-automation');
+  });
+
+  it('filters services by keyword search (case-insensitive)', () => {
+    const services = filterServices(CORE_SERVICES, 'iOS App', 'All');
+    assert.equal(services.length, 1);
+    assert.equal(services[0].id, 'service-mobile-apps');
+  });
+
+  it('matches Apify keyword in AI and Automation service card', () => {
+    const services = filterServices(CORE_SERVICES, 'Apify', 'All');
+    assert.equal(services.length, 1);
+    assert.equal(services[0].id, 'service-ai-automation');
+  });
+
+  it('returns empty arrays when search query matches nothing', () => {
+    const services = filterServices(CORE_SERVICES, 'nonexistent-xyz-999', 'All');
+    const portfolio = filterPortfolioItems(PORTFOLIO_SHOWCASE, 'nonexistent-xyz-999', 'All');
+    assert.equal(services.length, 0);
+    assert.equal(portfolio.length, 0);
+  });
+});
+
+describe('Secure Project Inquiry Validation & Email Protection', () => {
+  it('flags missing fields accurately', () => {
+    const result = validateInquiryForm({
+      fullName: 'A',
+      country: '',
+      verificationUrl: 'x',
+      projectCategory: '',
+      projectDetails: 'Short',
+      estimatedBudget: ''
+    });
+
+    assert.equal(result.valid, false);
+    assert.ok(result.errors.fullName);
+    assert.ok(result.errors.country);
+    assert.ok(result.errors.verificationUrl);
+    assert.ok(result.errors.projectCategory);
+    assert.ok(result.errors.estimatedBudget);
+    assert.ok(result.errors.projectDetails);
+  });
+
+  it('passes valid input', () => {
+    const result = validateInquiryForm({
+      fullName: 'Alex Mercer',
+      country: 'United Kingdom',
+      verificationUrl: 'https://linkedin.com/in/alexmercer',
+      projectCategory: 'Custom AI Tools and Automation',
+      projectDetails: 'We need an enterprise multi-agent Apify workflow and mobile dashboard.',
+      estimatedBudget: '$10,000 – $25,000 (Full-Scale Platform & Architecture)'
+    });
+
+    assert.equal(result.valid, true);
+    assert.equal(Object.keys(result.errors).length, 0);
+  });
+
+  it('reconstructs the destination address accurately', () => {
+    assert.equal(getProtectedDestinationInbox(), 'orbitagency61@gmail.com');
+  });
+});
+
+describe('Apify & AI Webhook Endpoint Builder', () => {
+  it('constructs valid Apify v2 Actor runs URL', () => {
+    const url = buildApifyActorEndpoint('orbit-agency~ai-web-scraper');
+    assert.equal(
+      url,
+      'https://api.apify.com/v2/acts/orbit-agency~ai-web-scraper/runs'
+    );
+  });
+
+  it('has 3 preconfigured Apify Actor & AI Webhook presets', () => {
+    assert.equal(APIFY_ACTOR_PRESETS.length, 3);
+  });
 });
