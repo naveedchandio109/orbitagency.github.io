@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: #FFFFFF;
+    color: #0F172A;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes orbitSpin360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinReverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbitPulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 2px 8px rgba(14, 165, 233, 0.35)) drop-shadow(0 0 14px rgba(138, 43, 226, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 2px 12px rgba(236, 72, 153, 0.45)) drop-shadow(0 0 20px rgba(14, 165, 233, 0.45));
+  }
+}
+
+.animate-orbit-360 {
+  animation: orbitSpin360 10s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-orbit-reverse {
+  animation: orbitSpinReverse 14s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-neon-pulse {
+  animation: orbitPulseGlow 3.5s ease-in-out infinite;
+}
